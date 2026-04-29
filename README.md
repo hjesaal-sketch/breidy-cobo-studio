@@ -1,2 +1,2 @@
-# breidy-cobos-studio
+# breidy-cobo-studio
 demo breidy cobo site
