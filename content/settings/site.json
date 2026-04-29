@@ -1,0 +1,17 @@
+{
+  "hero": {
+    "mode": "video",
+    "image": "/assets/img/hero/breidy-cobo-hero.jpg",
+    "video": "/assets/video/hero-breidy.mp4"
+  },
+  "contact": {
+    "email": "correo@ejemplo.com",
+    "city": "Caracas / Berlín",
+    "instagram": "https://www.instagram.com/breidy_cobo/",
+    "tiktok": "https://www.tiktok.com/@breidycobo"
+  },
+  "site": {
+    "title": "Breidy Cobo",
+    "tagline": "Pintura contemporánea"
+  }
+}

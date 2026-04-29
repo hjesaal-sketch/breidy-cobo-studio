@@ -1,0 +1,157 @@
+backend:
+  # Backend de prueba/local que NO requiere login
+  name: test-repo
+
+# Carpeta REAL donde se guardan las imágenes en tu proyecto
+media_folder: "assets/img/uploads"
+
+# Cómo se referencian esas imágenes desde el navegador (URLs públicas)
+public_folder: "/assets/img/uploads"
+
+collections:
+  # :::::::::::::::::::::::::::::::::::::::::::::::::
+  # 1. OBRAS (content/works/*.md)
+  # :::::::::::::::::::::::::::::::::::::::::::::::::
+  - name: "works"
+    label: "Obras"
+    label_singular: "Obra"
+    folder: "content/works"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{year}} — {{title}} ({{status}})"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "figura-contenida (sin espacios)" }
+      - { label: "Año", name: "year", widget: "number", value_type: "int" }
+      - { label: "Técnica", name: "medium", widget: "string", hint: "Acrílico sobre lienzo" }
+      - { label: "Medidas", name: "size", widget: "string", hint: "80 × 60 cm" }
+      - label: "Estado"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "Disponible", value: "disponible" }
+          - { label: "Reservada", value: "reservada" }
+          - { label: "Vendida", value: "vendida" }
+      - { label: "Imagen principal", name: "image", widget: "image", hint: "Se guarda en assets/img/uploads" }
+      - { label: "Serie (slug)", name: "series", widget: "string", required: false, hint: "materia-y-silencio" }
+      - { label: "Destacada en home", name: "featured", widget: "boolean", default: false }
+      - { label: "Idioma", name: "lang", widget: "select", options: ["es", "en"], default: "es" }
+      - { label: "Texto de la obra", name: "body", widget: "markdown" }
+
+  # :::::::::::::::::::::::::::::::::::::::::::::::::
+  # 2. SERIES (content/series/*.md)
+  # :::::::::::::::::::::::::::::::::::::::::::::::::
+  - name: "series"
+    label: "Series"
+    label_singular: "Serie"
+    folder: "content/series"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "materia-y-silencio" }
+      - { label: "Imagen principal", name: "image", widget: "image", required: false }
+      - { label: "Orden", name: "order", widget: "number", value_type: "int", required: false }
+      - { label: "Idioma", name: "lang", widget: "select", options: ["es", "en"], default: "es" }
+      - { label: "Texto de la serie", name: "body", widget: "markdown" }
+
+  # :::::::::::::::::::::::::::::::::::::::::::::::::
+  # 3. PÁGINAS ÚNICAS (statement, bio, site)
+  # :::::::::::::::::::::::::::::::::::::::::::::::::
+  - name: "pages"
+    label: "Páginas"
+    files:
+      # 3.1 Statement
+      - label: "Statement"
+        name: "statement"
+        file: "content/pages/statement.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Idioma", name: "lang", widget: "select", options: ["es", "en"], default: "es" }
+          - { label: "Cuerpo", name: "body", widget: "markdown" }
+
+      # 3.2 Biografía
+      - label: "Biografía"
+        name: "bio"
+        file: "content/pages/bio.md"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Idioma", name: "lang", widget: "select", options: ["es", "en"], default: "es" }
+          - { label: "Cuerpo", name: "body", widget: "markdown" }
+
+      # 3.3 Datos del sitio (email, redes, etc.)
+      - label: "Datos del sitio"
+        name: "site"
+        file: "content/pages/site.md"
+        fields:
+          - { label: "Nombre de la artista", name: "artist_name", widget: "string" }
+          - { label: "Ciudad", name: "city", widget: "string" }
+          - { label: "Email de contacto", name: "email", widget: "string" }
+          - { label: "Instagram", name: "instagram", widget: "string", required: false }
+          - { label: "Otras redes", name: "social_links", widget: "list", required: false,
+              field: { label: "URL", name: "url", widget: "string" } }
+
+  # :::::::::::::::::::::::::::::::::::::::::::::::::
+  # 4. EXPOSICIONES (content/exhibitions/*.md)
+  # :::::::::::::::::::::::::::::::::::::::::::::::::
+  - name: "exhibitions"
+    label: "Exposiciones"
+    label_singular: "Exposición"
+    folder: "content/exhibitions"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{year}} — {{title}} ({{city}})"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "2024-memoria-de-la-materia" }
+      - { label: "Año", name: "year", widget: "number", value_type: "int" }
+      - { label: "Ciudad", name: "city", widget: "string" }
+      - { label: "Sala / espacio", name: "venue", widget: "string" }
+      - label: "Tipo"
+        name: "type"
+        widget: "select"
+        options:
+          - { label: "Individual", value: "individual" }
+          - { label: "Colectiva", value: "colectiva" }
+          - { label: "Feria", value: "feria" }
+      - { label: "Imagen (opcional)", name: "image", widget: "image", required: false }
+      - { label: "Idioma", name: "lang", widget: "select", options: ["es", "en"], default: "es" }
+      - { label: "Texto / ficha", name: "body", widget: "markdown" }
+
+  # :::::::::::::::::::::::::::::::::::::::::::::::::
+  # 5. PRENSA (content/press/*.md)
+  # :::::::::::::::::::::::::::::::::::::::::::::::::
+  - name: "press"
+    label: "Prensa"
+    label_singular: "Entrada de prensa"
+    folder: "content/press"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{year}} — {{outlet}}: {{title}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "2024-revista-arte-latino" }
+      - { label: "Año", name: "year", widget: "number", value_type: "int" }
+      - { label: "Medio", name: "outlet", widget: "string", hint: "Revista Arte Latino" }
+      - label: "Tipo"
+        name: "type"
+        widget: "select"
+        options:
+          - { label: "Reseña", value: "resena" }
+          - { label: "Entrevista", value: "entrevista" }
+          - { label: "Nota breve", value: "nota" }
+          - { label: "Catálogo", value: "catalogo" }
+      - { label: "Imagen / portada", name: "image", widget: "image", required: false }
+      - { label: "Enlace externo", name: "link", widget: "string", required: false }
+      - { label: "PDF", name: "pdf", widget: "file", required: false }
+      - { label: "Idioma", name: "lang", widget: "select", options: ["es", "en"], default: "es" }
+      - { label: "Texto / extracto", name: "body", widget: "markdown" }

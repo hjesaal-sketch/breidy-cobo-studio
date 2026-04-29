@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breidy Cobo — Pintura contemporánea</title>
+  <meta name="description" content="Propuesta híbrida para Breidy Cobo inspirada en la claridad visual de sitios tipo Sara Winfield, con paleta cálida y marcos que respetan la materialidad de su pintura." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+<header class="site-header">
+  <a class="skip-link" href="#main-content">Saltar al contenido</a>
+
+  <div class="container header-inner">
+    <!-- Marca grande -->
+    <a href="#top" class="brand" aria-label="Inicio Breidy Cobo">
+      Breidy Cobo
+    </a>
+
+    <!-- Menú centrado -->
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="obras/index.html">Obras</a>
+      <a href="series/index.html">Series</a>
+      <a href="#artist">Artista</a>
+      <a href="journal/index.html">Textos</a>
+      <a href="#contact">Contacto</a>
+    </nav>
+
+    <!-- Acciones en barra: solo CTA + tema + hamburguesa -->
+    <div class="header-actions">
+      <a href="obras/index.html" class="btn btn-primary btn-collection">Ver colección</a>
+
+      <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle>
+        ◐
+      </button>
+
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" data-menu-toggle>
+        ☰
+      </button>
+    </div>
+  </div>
+
+  <!-- Panel móvil / secundario: aquí SÍ van idiomas + redes + menú -->
+  <div class="mobile-panel" data-mobile-panel>
+    <div class="container">
+      <div class="mobile-top">
+        <div class="mobile-lang" aria-label="Cambiar idioma">
+          <button class="lang-btn active" type="button" data-lang="es">ES</button>
+          <button class="lang-btn" type="button" data-lang="en">EN</button>
+          <button class="lang-btn" type="button" data-lang="de">DE</button>
+        </div>
+
+        <div class="mobile-social" aria-label="Redes sociales">
+          <span>Redes</span>
+          <a href="https://www.instagram.com/breidy_cobo/" target="_blank" rel="noopener noreferrer">IG</a>
+          <span>/</span>
+          <a href="https://www.tiktok.com/@breidycobo" target="_blank" rel="noopener noreferrer">TikTok</a>
+          <span>/</span>
+          <a href="mailto:correo@ejemplo.com">Email</a>
+        </div>
+      </div>
+
+      <nav class="mobile-nav" aria-label="Navegación móvil">
+        <a href="obras/index.html">Obras</a>
+        <a href="series/index.html">Series</a>
+        <a href="#artist">Artista</a>
+        <a href="journal/index.html">Textos</a>
+        <a href="#contact">Contacto</a>
+      </nav>
+    </div>
+  </div>
+</header>
+  <main id="main-content">
+    <!-- HERO CON OPCIÓN IMAGEN O VIDEO LISTO PARA CMS -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-band" data-hero-type="">
+          <div class="hero-media hero-media-image"></div>
+
+          <div class="hero-media hero-media-video">
+            <video class="hero-video" autoplay muted loop playsinline>
+              <!-- el CMS llenará este src -->
+              <source src="" type="video/mp4">
+              Tu navegador no soporta video en HTML5.
+            </video>
+          </div>
+
+          <div class="hero-overlay">
+            <div class="eyebrow">Pintura contemporánea</div>
+            <h1>Materia contenida, calma visual.</h1>
+            <p>
+              Hero tipo banda, con imagen amplia o video al fondo y texto encima, acercándose al lenguaje claro de sitios tipo Sara pero con el clima cálido y contenido de Breidy.
+            </p>
+            <div class="hero-actions">
+              <a href="obras/index.html" class="btn btn-primary">Explorar obras</a>
+              <a href="#artist" class="btn">Sobre la artista</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- OBRAS EN COLUMNA VERTICAL -->
+    <section class="section" id="works">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Selección destacada</div>
+          <h2>Obras</h2>
+          <p>
+            Lista vertical de piezas: imágenes protagonistas, ficha mínima y un enmarque sutil para sostener mejor la presencia matérica de cada lienzo.
+          </p>
+        </div>
+
+        <div class="works-grid">
+          <article class="card">
+            <div class="framed-media">
+              <div class="frame-inner">
+                <img src="breidy-obra-01.jpeg" alt="Obra Energía y visión de Breidy Cobo" />
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="kicker">Disponible</div>
+              <h3>Energía y visión</h3>
+              <p>Contraste medido, figura insinuada y tensión cromática controlada.</p>
+              <div class="meta">
+                <span>Lienzo</span>
+                <span>2025</span>
+                <span>Consulta disponible</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="framed-media">
+              <div class="frame-inner">
+                <img src="breidy-obra-02.jpeg" alt="Obra Figura contenida de Breidy Cobo" />
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="kicker">Disponible</div>
+              <h3>Figura contenida</h3>
+              <p>Composición íntima, presencia humana y economía expresiva.</p>
+              <div class="meta">
+                <span>Lienzo</span>
+                <span>2025</span>
+                <span>Consulta disponible</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="framed-media">
+              <div class="frame-inner">
+                <img src="breidy-obra-03.jpeg" alt="Obra Tensión suave de Breidy Cobo" />
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="kicker">Vendida</div>
+              <h3>Tensión suave</h3>
+              <p>Una superficie que condensa silencio, pausa y vibración interna.</p>
+              <div class="meta">
+                <span>Lienzo</span>
+                <span>2024</span>
+                <span>Obra vendida</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- SERIES EN COLUMNA VERTICAL -->
+    <section class="section" id="series">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Capítulos visuales</div>
+          <h2>Series</h2>
+          <p>
+            Colecciones organizadas en una sola columna, cada una presentada como capítulo visual que ayuda a entender el universo de obra.
+          </p>
+        </div>
+
+        <div class="series-grid">
+          <article class="card">
+            <div class="framed-media">
+              <div class="frame-inner">
+                <img src="breidy-serie-01.jpeg" alt="Serie Materia y silencio" />
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="kicker">Serie</div>
+              <h3>Materia y silencio</h3>
+              <p>Piezas donde el gesto se contiene y la superficie respira.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="framed-media">
+              <div class="frame-inner">
+                <img src="breidy-serie-02.jpeg" alt="Serie Arquitectura interior" />
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="kicker">Serie</div>
+              <h3>Arquitectura interior</h3>
+              <p>Memoria visual, ritmo arquitectónico y capas de tránsito interior.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="framed-media">
+              <div class="frame-inner">
+                <img src="breidy-serie-03.jpeg" alt="Serie Huellas emocionales" />
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="kicker">Serie</div>
+              <h3>Huellas emocionales</h3>
+              <p>Texturas, desgaste y una temporalidad íntima convertida en materia.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ARTISTA -->
+    <section class="section" id="artist">
+      <div class="container artist-section-inner">
+        <div class="section-head">
+          <div class="eyebrow">Sobre la artista</div>
+          <h2>Una pintura que no grita: permanece.</h2>
+        </div>
+
+        <article class="artist-card">
+          <div class="artist-layout">
+            <div class="artist-text">
+              <p>
+                Breidy Cobo construye una pintura íntima, matérica y emocional. Su lenguaje visual se mueve entre la serenidad, la vibración contenida y una sensibilidad contemporánea que prioriza atmósfera, memoria y estructura interior.
+              </p>
+              <div class="artist-quote">“La materia no cubre: revela.”</div>
+
+              <div class="artist-social">
+                <span>Sigue el estudio:</span>
+                <a href="https://www.instagram.com/breidy_cobo/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Breidy Cobo" class="artist-social-link">
+                  <svg class="icon icon-social" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <rect
+                      x="3.5"
+                      y="3.5"
+                      width="17"
+                      height="17"
+                      rx="5"
+                      ry="5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="4.2"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                    />
+                    <circle
+                      cx="17"
+                      cy="7"
+                      r="1.2"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </a>
+                <a href="https://www.tiktok.com/@breidycobo" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Breidy Cobo" class="artist-social-link">
+                  <svg class="icon icon-social" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path
+                      d="M15.5 5.5c.6 1.1 1.6 2 2.8 2.4v2.3a5.5 5.5 0 0 1-3.3-1v4.2a4.5 4.5 0 1 1-4.5-4.5 4.3 4.3 0 0 1 1 .1v2.2a2.3 2.3 0 1 0 1.7 2.2V4.5h2.3z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="artist-image-frame">
+              <div class="artist-image-inner">
+                <img src="assets/img/portrait/breidy-cobo-portrait.jpg" alt="Retrato editorial de Breidy Cobo" />
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- JOURNAL -->
+    <section class="section" id="journal">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Contexto y lectura</div>
+          <h2>Textos, prensa y exposiciones</h2>
+          <p>
+            Zona para statement ampliado, reseñas, exposiciones y material editorial; formalmente sencilla, con la misma verticalidad limpia.
+          </p>
+        </div>
+
+        <div class="journal-grid">
+          <article class="journal-card">
+            <div class="kicker">Statement</div>
+            <h3>Cartografía emocional</h3>
+            <p>El concepto emocional de la obra busca una presencia íntima, matérica y serena; una abstracción que respira sin dejar de sentirse viva.</p>
+          </article>
+
+          <article class="journal-card">
+            <div class="kicker">Exposiciones</div>
+            <h3>Trayectoria</h3>
+            <p>Espacio listo para registrar ciudad, sala, curaduría, piezas exhibidas, reseñas y presencia editorial futura.</p>
+          </article>
+
+          <article class="journal-card">
+            <div class="kicker">Prensa</div>
+            <h3>Lecturas y reseñas</h3>
+            <p>Área ideal para entrevistas, notas críticas, PDFs de catálogo y enlaces a publicaciones.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CONTACTO -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="newsletter-panel">
+          <div class="eyebrow">Contacto</div>
+          <h2>Únete al círculo de coleccionistas</h2>
+          <p>
+            Cierre claro y comercial: consultas de obra disponible, encargos, exposiciones o colaboraciones, listo para conectarse luego a un CMS o a email marketing.
+          </p>
+
+          <form class="newsletter-form">
+            <input type="email" placeholder="Tu correo electrónico" aria-label="Correo electrónico" />
+            <button type="submit" class="btn btn-primary">Solicitar información</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>Breidy Cobo — Pintura contemporánea</p>
+    <div class="footer-links">
+      <a href="obras/index.html">Obras</a>
+      <a href="#series">Series</a>
+      <a href="#artist">Artista</a>
+      <a href="journal/index.html">Textos</a>
+      <a href="#contact">Contacto</a>
+    </div>
+    <p class="footer-social">
+      <a href="https://www.instagram.com/breidy_cobo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <span>·</span>
+      <a href="https://www.tiktok.com/@breidycobo" target="_blank" rel="noopener noreferrer">TikTok</a>
+      <span>·</span>
+      <a href="mailto:correo@ejemplo.com">Email</a>
+    </p>
+  </div>
+
+  <div class="container">
+    <p class="site-credit">
+      Sitio web por
+      <a href="https://eosconnecting.com" target="_blank" rel="noopener noreferrer">
+        Eos Connecting — Henry Esaá
+      </a>
+    </p>
+  </div>
+</footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

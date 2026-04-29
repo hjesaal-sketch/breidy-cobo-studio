@@ -1,0 +1,35 @@
+[
+  {
+    "slug": "energia-y-vision",
+    "title": "Energía y visión",
+    "year": 2025,
+    "medium": "Acrílico sobre lienzo",
+    "size": "80 × 60 cm",
+    "status": "disponible",
+    "image": "../assets/img/obras/breidy-obra-01.jpeg",
+    "excerpt": "Contraste medido, figura insinuada y tensión cromática controlada.",
+    "description": "Una composición donde el color se organiza como un sistema de fuerzas en tensión, explorando la relación entre impulso y claridad."
+  },
+  {
+    "slug": "figura-contenida",
+    "title": "Figura contenida",
+    "year": 2025,
+    "medium": "Acrílico sobre lienzo",
+    "size": "80 × 60 cm",
+    "status": "disponible",
+    "image": "../assets/img/obras/breidy-obra-02.jpeg",
+    "excerpt": "Composición íntima, presencia humana y economía expresiva.",
+    "description": "La presencia de una figura insinuada que nunca termina de definirse, suspendida entre el gesto y la contención."
+  },
+  {
+    "slug": "tension-suave",
+    "title": "Tensión suave",
+    "year": 2024,
+    "medium": "Acrílico sobre lienzo",
+    "size": "80 × 60 cm",
+    "status": "vendida",
+    "image": "../assets/img/obras/breidy-obra-03.jpeg",
+    "excerpt": "Una superficie que condensa silencio, pausa y vibración interna.",
+    "description": "Planos de color que parecen rozarse sin llegar a colisionar, construyendo un tipo de calma que nunca es del todo estable."
+  }
+]

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journal — Breidy Cobo</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS compartido -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" aria-label="Inicio Breidy Cobo">
+        Breidy Cobo
+      </a>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="../obras/index.html">Obras</a>
+        <a href="../series/index.html">Series</a>
+        <a href="../index.html#artist">Artista</a>
+        <a href="./index.html" aria-current="page">Textos</a>
+        <a href="../index.html#contact">Contacto</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#journal-list" class="btn btn-primary btn-collection">Ver textos</a>
+
+        <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle>
+          ◐
+        </button>
+
+        <button class="menu-toggle" type="button" aria-label="Abrir menú" data-menu-toggle>
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Panel móvil -->
+    <div class="mobile-panel" data-mobile-panel>
+      <div class="container">
+        <div class="mobile-top">
+          <div class="mobile-lang" aria-label="Cambiar idioma">
+            <button class="lang-btn active" type="button" data-lang="es">ES</button>
+            <button class="lang-btn" type="button" data-lang="en">EN</button>
+            <button class="lang-btn" type="button" data-lang="de">DE</button>
+          </div>
+
+          <div class="mobile-social" aria-label="Redes y contacto">
+            <span>Conectar</span>
+            <a href="https://www.instagram.com/breidy_cobo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <span>/</span>
+            <a href="https://www.tiktok.com/@breidycobo" target="_blank" rel="noopener noreferrer">TikTok</a>
+            <span>/</span>
+            <a href="mailto:correo@ejemplo.com">Email</a>
+          </div>
+        </div>
+
+        <nav class="mobile-nav" aria-label="Navegación móvil">
+          <a href="../obras/index.html">Obras</a>
+          <a href="../series/index.html">Series</a>
+          <a href="../index.html#artist">Artista</a>
+          <a href="./index.html">Textos</a>
+          <a href="../index.html#contact">Contacto</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Textos</div>
+          <h1>Journal</h1>
+          <p>
+            Apuntes de proceso, notas de taller y textos que expanden las obras y series.
+          </p>
+        </div>
+
+        <div class="journal-intro">
+          <p>
+            Aquí se reúnen textos en torno a la práctica de Breidy Cobo: procesos, decisiones
+            formales, referencias y las preguntas que sostienen las obras en el tiempo.
+          </p>
+        </div>
+
+        <!-- Lista de textos: se llena desde main.js / JSON -->
+        <div class="journal-grid" id="journal-list" aria-label="Entradas del journal"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Breidy Cobo — Pintura contemporánea</p>
+      <div class="footer-links">
+        <a href="../obras/index.html">Obras</a>
+        <a href="../series/index.html">Series</a>
+        <a href="../index.html#artist">Artista</a>
+        <a href="./index.html">Textos</a>
+        <a href="../index.html#contact">Contacto</a>
+      </div>
+      <p class="footer-social">
+        <a href="https://www.instagram.com/breidy_cobo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <span>·</span>
+        <a href="https://www.tiktok.com/@breidycobo" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <span>·</span>
+        <a href="mailto:correo@ejemplo.com">Email</a>
+      </p>
+    </div>
+
+    <div class="container">
+      <p class="site-credit">
+        Sitio web por
+        <a href="https://eosconnecting.com" target="_blank" rel="noopener noreferrer">
+          Eos Connecting — Henry Esaá
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

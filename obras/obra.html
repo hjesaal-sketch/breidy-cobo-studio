@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obra — Breidy Cobo</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS compartido -->
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+
+    <div class="container header-inner">
+      <a href="../index.html" class="brand" aria-label="Inicio Breidy Cobo">
+        Breidy Cobo
+      </a>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="../obras/index.html">Obras</a>
+        <a href="../series/index.html">Series</a>
+        <a href="../index.html#artist">Artista</a>
+        <a href="../journal/index.html">Textos</a>
+        <a href="../index.html#contact">Contacto</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="../obras/index.html" class="btn btn-primary btn-collection">Ver colección</a>
+
+        <button class="theme-toggle" type="button" aria-label="Cambiar tema" data-theme-toggle>
+          ◐
+        </button>
+
+        <button class="menu-toggle" type="button" aria-label="Abrir menú" data-menu-toggle>
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Panel móvil -->
+    <div class="mobile-panel" data-mobile-panel>
+      <div class="container">
+        <div class="mobile-top">
+          <div class="mobile-lang" aria-label="Cambiar idioma">
+            <button class="lang-btn active" type="button" data-lang="es">ES</button>
+            <button class="lang-btn" type="button" data-lang="en">EN</button>
+            <button class="lang-btn" type="button" data-lang="de">DE</button>
+          </div>
+
+          <div class="mobile-social" aria-label="Redes y contacto">
+            <span>Conectar</span>
+            <a href="https://www.instagram.com/breidy_cobo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <span>/</span>
+            <a href="https://www.tiktok.com/@breidycobo" target="_blank" rel="noopener noreferrer">TikTok</a>
+            <span>/</span>
+            <a href="mailto:correo@ejemplo.com">Email</a>
+          </div>
+        </div>
+
+        <nav class="mobile-nav" aria-label="Navegación móvil">
+          <a href="../obras/index.html">Obras</a>
+          <a href="../index.html#series">Series</a>
+          <a href="../index.html#artist">Artista</a>
+          <a href="../journal/index.html">Textos</a>
+          <a href="../index.html#contact">Contacto</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="section work-detail" id="work">
+      <div class="container work-detail-layout">
+        <div class="work-detail-media">
+          <figure class="work-figure">
+            <img
+              id="work-image"
+              src=""
+              alt=""
+              loading="lazy"
+            />
+          </figure>
+        </div>
+
+        <div class="work-detail-content">
+          <header class="work-detail-header">
+            <p class="eyebrow">
+              Obra
+            </p>
+            <h1 id="work-title">Título de la obra</h1>
+            <p id="work-year" class="work-year">Año</p>
+          </header>
+
+          <div class="work-meta">
+            <p id="work-size" class="work-meta-item">Tamaño</p>
+            <p id="work-medium" class="work-meta-item">Técnica</p>
+            <p id="work-status" class="work-meta-item work-status">Estado</p>
+          </div>
+
+          <div class="work-description">
+            <p id="work-description">
+              Descripción de la obra.
+            </p>
+          </div>
+
+          <div class="work-actions">
+            <a href="../obras/index.html" class="btn btn-ghost">
+              ← Volver a la colección
+            </a>
+            <a href="../index.html#contact" class="btn btn-primary">
+              Consultar sobre esta obra
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Breidy Cobo — Pintura contemporánea</p>
+      <div class="footer-links">
+        <a href="../obras/index.html">Obras</a>
+        <a href="../series/index.html">Series</a>
+        <a href="../index.html#artist">Artista</a>
+        <a href="../journal/index.html">Textos</a>
+        <a href="../index.html#contact">Contacto</a>
+      </div>
+      <p class="footer-social">
+        <a href="https://www.instagram.com/breidy_cobo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <span>·</span>
+        <a href="https://www.tiktok.com/@breidycobo" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <span>·</span>
+        <a href="mailto:correo@ejemplo.com">Email</a>
+      </p>
+    </div>
+
+    <div class="container">
+      <p class="site-credit">
+        Sitio web por
+        <a href="https://eosconnecting.com" target="_blank" rel="noopener noreferrer">
+          Eos Connecting — Henry Esaá
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

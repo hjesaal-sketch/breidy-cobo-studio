@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "materia-y-silencio",
+    "title": "Materia y silencio",
+    "subtitle": "2023–2025",
+    "description": "Piezas donde el gesto se contiene y la superficie respira, construyendo una calma atenta más que pasiva.",
+    "period": "2023–2025",
+    "notes": "Serie centrada en la relación entre materia, silencio y respiración del plano pictórico.",
+    "image": "../assets/img/series/breidy-serie-01.jpeg"
+  },
+  {
+    "slug": "arquitectura-interior",
+    "title": "Arquitectura interior",
+    "subtitle": "2022–2024",
+    "description": "Capas de memoria, ritmo arquitectónico y estructuras que sostienen una emoción más que una escena literal.",
+    "period": "2022–2024",
+    "notes": "Serie que trabaja con la idea de espacio interno como lugar habitable más que representado.",
+    "image": "../assets/img/series/breidy-serie-02.jpeg"
+  },
+  {
+    "slug": "huellas-emocionales",
+    "title": "Huellas emocionales",
+    "subtitle": "2021–2023",
+    "description": "Texturas, desgaste y una temporalidad íntima convertida en materia, como si la superficie recordara lo vivido.",
+    "period": "2021–2023",
+    "notes": "Explora la pintura como superficie de memoria, donde cada capa deja rastro.",
+    "image": "../assets/img/series/breidy-serie-03.jpeg"
+  }
+]
