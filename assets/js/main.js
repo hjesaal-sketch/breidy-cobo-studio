@@ -9,19 +9,34 @@
   const mobilePanel = document.querySelector('[data-mobile-panel]');
 
   // =========================
-  // SETTINGS DESDE JSON (CMS SIMULADO) PARA HERO
+  // SETTINGS DESDE SANITY PARA HERO
   // =========================
 
   let SITE_SETTINGS = null;
 
   async function loadSiteSettings() {
     if (SITE_SETTINGS) return SITE_SETTINGS;
+
+    const projectId = 'qq8wzii5';
+    const dataset = 'production';
+    const query = `*[_type == "siteSettings"][0]{
+      siteTitle,
+      siteTagline,
+      heroMode,
+      "heroVideoUrl": heroVideo.asset->url
+    }`;
+
+    const url = `https://${projectId}.api.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(
+      query
+    )}`;
+
     try {
-      const res = await fetch('/content/settings/site.json');
-      if (!res.ok) throw new Error('No se pudo cargar site.json');
-      SITE_SETTINGS = await res.json();
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('No se pudo cargar siteSettings desde Sanity');
+      const data = await res.json();
+      SITE_SETTINGS = data.result || {};
     } catch (e) {
-      console.warn('No se pudieron cargar los ajustes del sitio:', e);
+      console.warn('No se pudieron cargar los ajustes del sitio desde Sanity:', e);
       SITE_SETTINGS = {};
     }
     return SITE_SETTINGS;
@@ -32,37 +47,36 @@
     if (!heroBand) return;
 
     const settings = await loadSiteSettings();
-    const hero = settings.hero || {};
 
-    const mode = hero.mode === 'video' ? 'video' : 'image';
-    const imageUrl = hero.image || '';
-    const videoUrl = hero.video || '';
+    const mode = settings.heroMode === 'video' ? 'video' : 'image';
+    const videoUrl = settings.heroVideoUrl || '';
 
     heroBand.setAttribute(
       'data-hero-type',
       mode === 'video' && videoUrl ? 'video' : 'image'
     );
 
-    // --- VIDEO ACTIVO ---
+    // --- VIDEO DESDE SANITY ---
     if (mode === 'video' && videoUrl) {
-      const sourceEl = heroBand.querySelector('.hero-video source');
-      const videoEl = heroBand.querySelector('.hero-video');
+      const videoEl = heroBand.querySelector('[data-hero-video]');
+      const sourceEl = videoEl ? videoEl.querySelector('source') : null;
 
-      if (sourceEl && videoEl) {
+      if (videoEl && sourceEl) {
         sourceEl.setAttribute('src', videoUrl);
         videoEl.load();
       }
     }
 
-    // --- IMAGEN COMENTADA: DESCOMENTAR SI LA QUIERES USAR ---
-    /*
-    if (imageUrl && mode === 'image') {
-      heroBand.style.backgroundImage = `
-        linear-gradient(180deg, rgba(10,7,4,0.3), rgba(10,7,4,0.6)),
-        url("${imageUrl}")
-      `;
+    // --- TEXTO HERO (TITLE / TAGLINE) ---
+    const titleEl = document.querySelector('[data-site-title]');
+    const taglineEl = document.querySelector('[data-site-tagline]');
+
+    if (titleEl && settings.siteTitle) {
+      titleEl.textContent = settings.siteTitle;
     }
-    */
+    if (taglineEl && settings.siteTagline) {
+      taglineEl.textContent = settings.siteTagline;
+    }
   }
 
   // =========================

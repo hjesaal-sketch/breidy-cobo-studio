@@ -74,35 +74,42 @@
     </div>
   </div>
 </header>
-  <main id="main-content">
-    <!-- HERO CON OPCIÓN IMAGEN O VIDEO LISTO PARA CMS -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-band" data-hero-type="">
-          <div class="hero-media hero-media-image"></div>
+<main id="main-content">
+  <!-- HERO CON OPCIÓN IMAGEN O VIDEO LISTO PARA CMS -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-band" data-hero-type="">
+        <div class="hero-media hero-media-image" data-hero-image></div>
 
-          <div class="hero-media hero-media-video">
-            <video class="hero-video" autoplay muted loop playsinline>
-              <!-- el CMS llenará este src -->
-              <source src="" type="video/mp4">
-              Tu navegador no soporta video en HTML5.
-            </video>
-          </div>
+        <div class="hero-media hero-media-video">
+          <video
+            class="hero-video"
+            data-hero-video
+            autoplay
+            muted
+            loop
+            playsinline
+          >
+            <source src="" type="video/mp4" />
+            Tu navegador no soporta video en HTML5.
+          </video>
+        </div>
 
-          <div class="hero-overlay">
-            <div class="eyebrow">Pintura contemporánea</div>
-            <h1>Materia contenida, calma visual.</h1>
-            <p>
-              Hero tipo banda, con imagen amplia o video al fondo y texto encima, acercándose al lenguaje claro de sitios tipo Sara pero con el clima cálido y contenido de Breidy.
-            </p>
-            <div class="hero-actions">
-              <a href="obras/index.html" class="btn btn-primary">Explorar obras</a>
-              <a href="#artist" class="btn">Sobre la artista</a>
-            </div>
+        <div class="hero-overlay">
+          <div class="eyebrow" data-site-tagline>Pintura contemporánea</div>
+          <h1 data-site-title>Materia contenida, calma visual.</h1>
+          <p>
+            Hero tipo banda, con imagen amplia o video al fondo y texto encima, acercándose
+            al lenguaje claro de sitios tipo Sara pero con el clima cálido y contenido de Breidy.
+          </p>
+          <div class="hero-actions">
+            <a href="obras/index.html" class="btn btn-primary">Explorar obras</a>
+            <a href="#artist" class="btn">Sobre la artista</a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <div class="section-divider"></div>
 
