@@ -184,31 +184,99 @@
 })();
 
 // =========================
-// Carga de datos desde JSON (luego será CMS/API)
+// Carga de datos desde Sanity (en vez de JSON local)
 // =========================
 
 let WORKS = [];
 let SERIES = [];
 let JOURNAL = [];
 
+const SANITY_PROJECT_ID = 'qq8wzii5';
+const SANITY_DATASET = 'production';
+const SANITY_API_VERSION = '2021-10-21';
+
+function buildSanityUrl(groqQuery) {
+  return `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(
+    groqQuery
+  )}`;
+}
+
 async function loadWorks() {
   if (WORKS.length) return WORKS;
-  const res = await fetch('/content/works/work.json');
-  WORKS = await res.json();
+
+  const query = `*[_type == "work"] | order(year desc){
+    title,
+    "slug": slug.current,
+    year,
+    medium,
+    size,
+    status,
+    excerpt,
+    description,
+    "image": image.asset->url
+  }`;
+
+  try {
+    const res = await fetch(buildSanityUrl(query));
+    if (!res.ok) throw new Error('Error al cargar obras desde Sanity');
+    const data = await res.json();
+    WORKS = data.result || [];
+  } catch (e) {
+    console.warn('No se pudieron cargar las obras desde Sanity:', e);
+    WORKS = [];
+  }
+
   return WORKS;
 }
 
 async function loadSeries() {
   if (SERIES.length) return SERIES;
-  const res = await fetch('/content/series/series.json');
-  SERIES = await res.json();
+
+  const query = `*[_type == "series"] | order(orderRank asc){
+    title,
+    subtitle,
+    description,
+    period,
+    notes,
+    "slug": slug.current,
+    "image": image.asset->url
+  }`;
+
+  try {
+    const res = await fetch(buildSanityUrl(query));
+    if (!res.ok) throw new Error('Error al cargar series desde Sanity');
+    const data = await res.json();
+    SERIES = data.result || [];
+  } catch (e) {
+    console.warn('No se pudieron cargar las series desde Sanity:', e);
+    SERIES = [];
+  }
+
   return SERIES;
 }
 
 async function loadJournal() {
   if (JOURNAL.length) return JOURNAL;
-  const res = await fetch('/content/press/journal.json');
-  JOURNAL = await res.json();
+
+  const query = `*[_type == "journalEntry"] | order(date desc){
+    title,
+    excerpt,
+    category,
+    date,
+    "slug": slug.current,
+    contentHtml
+  }`;
+
+  try {
+    const res = await fetch(buildSanityUrl(query));
+    if (!res.ok) throw new Error('Error al cargar journal desde Sanity');
+    const data = await res.json();
+    JOURNAL = data.result || [];
+  } catch (e) {
+    console.warn('No se pudieron cargar los textos de journal desde Sanity:', e);
+    JOURNAL = [];
+  }
+
   return JOURNAL;
 }
 
