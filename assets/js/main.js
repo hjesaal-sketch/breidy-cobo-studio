@@ -247,7 +247,8 @@
     const query = `*[_type == "translation"]{
       key,
       es,
-      en
+      en,
+      de
     }`;
 
     const url = `https://${SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${SANITY_DATASET}?query=${encodeURIComponent(query)}`;
@@ -268,7 +269,10 @@
   function t(key) {
     const translation = TRANSLATIONS[key];
     if (!translation) return key;
-    return translation[CURRENT_LANG] || translation.es || key;
+    // Soporte para es, en, de
+    if (CURRENT_LANG === 'de' && translation.de) return translation.de;
+    if (CURRENT_LANG === 'en' && translation.en) return translation.en;
+    return translation.es || key;
   }
 
   async function applyTranslations() {
