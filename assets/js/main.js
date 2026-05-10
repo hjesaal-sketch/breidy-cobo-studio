@@ -9,7 +9,7 @@
   const mobilePanel = document.querySelector('[data-mobile-panel]');
 
   // =========================
-  // SETTINGS DESDE SANITY PARA HERO
+  // SETTINGS DESDE SANITY PARA TODO EL SITIO
   // =========================
 
   let SITE_SETTINGS = null;
@@ -22,8 +22,34 @@
     const query = `*[_type == "siteSettings"][0]{
       siteTitle,
       siteTagline,
+      siteDescription,
       heroMode,
-      "heroVideoUrl": heroVideo.asset->url
+      heroTitle,
+      heroDescription,
+      "heroVideoUrl": heroVideo.asset->url,
+      worksSectionEyebrow,
+      worksSectionTitle,
+      worksSectionIntro,
+      seriesSectionEyebrow,
+      seriesSectionTitle,
+      seriesSectionIntro,
+      journalSectionEyebrow,
+      journalSectionTitle,
+      journalSectionIntro,
+      artistEyebrow,
+      artistTitle,
+      artistDescription,
+      artistQuote,
+      artistImageAlt,
+      contactEyebrow,
+      contactTitle,
+      contactDescription,
+      contactEmailPlaceholder,
+      contactButtonText,
+      footerText,
+      contactEmail,
+      instagram,
+      tiktok
     }`;
 
     const url = `https://${projectId}.api.sanity.io/v2021-10-21/data/query/${dataset}?query=${encodeURIComponent(
@@ -40,6 +66,87 @@
       SITE_SETTINGS = {};
     }
     return SITE_SETTINGS;
+  }
+
+  async function loadGlobalTexts() {
+    const settings = await loadSiteSettings();
+
+    // Hero textos
+    const heroTitle = document.querySelector('[data-site-title]');
+    const heroTagline = document.querySelector('[data-site-tagline]');
+    const heroDescription = document.querySelector('[data-site-description]');
+    if (heroTitle && settings.heroTitle) heroTitle.textContent = settings.heroTitle;
+    if (heroTagline && settings.siteTagline) heroTagline.textContent = settings.siteTagline;
+    if (heroDescription && settings.heroDescription) heroDescription.textContent = settings.heroDescription;
+
+    // Sección Obras
+    const worksEyebrow = document.querySelector('[data-home-works-eyebrow]');
+    const worksTitle = document.querySelector('[data-home-works-title]');
+    const worksIntro = document.querySelector('[data-home-works-intro]');
+    if (worksEyebrow && settings.worksSectionEyebrow) worksEyebrow.textContent = settings.worksSectionEyebrow;
+    if (worksTitle && settings.worksSectionTitle) worksTitle.textContent = settings.worksSectionTitle;
+    if (worksIntro && settings.worksSectionIntro) worksIntro.textContent = settings.worksSectionIntro;
+
+    // Sección Series
+    const seriesEyebrow = document.querySelector('[data-home-series-eyebrow]');
+    const seriesTitle = document.querySelector('[data-home-series-title]');
+    const seriesIntro = document.querySelector('[data-home-series-intro]');
+    if (seriesEyebrow && settings.seriesSectionEyebrow) seriesEyebrow.textContent = settings.seriesSectionEyebrow;
+    if (seriesTitle && settings.seriesSectionTitle) seriesTitle.textContent = settings.seriesSectionTitle;
+    if (seriesIntro && settings.seriesSectionIntro) seriesIntro.textContent = settings.seriesSectionIntro;
+
+    // Sección Journal
+    const journalEyebrow = document.querySelector('[data-home-journal-eyebrow]');
+    const journalTitle = document.querySelector('[data-home-journal-title]');
+    const journalIntro = document.querySelector('[data-home-journal-intro]');
+    if (journalEyebrow && settings.journalSectionEyebrow) journalEyebrow.textContent = settings.journalSectionEyebrow;
+    if (journalTitle && settings.journalSectionTitle) journalTitle.textContent = settings.journalSectionTitle;
+    if (journalIntro && settings.journalSectionIntro) journalIntro.textContent = settings.journalSectionIntro;
+
+    // Sección Artista
+    const artistEyebrow = document.querySelector('[data-i18n="artist.eyebrow"]');
+    const artistTitle = document.querySelector('[data-i18n="artist.title"]');
+    const artistDescription = document.querySelector('[data-i18n="artist.description1"]');
+    const artistQuote = document.querySelector('[data-i18n="artist.quote"]');
+    const artistImageAlt = document.querySelector('[data-i18n-alt="artist.image_alt"]');
+    if (artistEyebrow && settings.artistEyebrow) artistEyebrow.textContent = settings.artistEyebrow;
+    if (artistTitle && settings.artistTitle) artistTitle.textContent = settings.artistTitle;
+    if (artistDescription && settings.artistDescription) artistDescription.textContent = settings.artistDescription;
+    if (artistQuote && settings.artistQuote) artistQuote.textContent = settings.artistQuote;
+    if (artistImageAlt && settings.artistImageAlt) artistImageAlt.setAttribute('alt', settings.artistImageAlt);
+
+    // Sección Contacto
+    const contactEyebrow = document.querySelector('[data-i18n="contact.eyebrow"]');
+    const contactTitle = document.querySelector('[data-i18n="contact.title"]');
+    const contactDescription = document.querySelector('[data-i18n="contact.description"]');
+    const contactPlaceholder = document.querySelector('[data-i18n-placeholder="contact.email_placeholder"]');
+    const contactButton = document.querySelector('[data-i18n="contact.submit"]');
+    if (contactEyebrow && settings.contactEyebrow) contactEyebrow.textContent = settings.contactEyebrow;
+    if (contactTitle && settings.contactTitle) contactTitle.textContent = settings.contactTitle;
+    if (contactDescription && settings.contactDescription) contactDescription.textContent = settings.contactDescription;
+    if (contactPlaceholder && settings.contactEmailPlaceholder) contactPlaceholder.setAttribute('placeholder', settings.contactEmailPlaceholder);
+    if (contactButton && settings.contactButtonText) contactButton.textContent = settings.contactButtonText;
+
+    // Footer (solo texto principal, el crédito NO es editable)
+    const footerText = document.querySelector('[data-footer-text]');
+    const contactEmailEl = document.querySelector('[data-contact-email]');
+    if (footerText && settings.footerText) footerText.textContent = settings.footerText;
+    if (contactEmailEl && settings.contactEmail) contactEmailEl.textContent = settings.contactEmail;
+
+    // Redes sociales
+    const instagramLink = document.querySelector('.footer-social a[href*="instagram"]');
+    const tiktokLink = document.querySelector('.footer-social a[href*="tiktok"]');
+    if (instagramLink && settings.instagram) instagramLink.href = settings.instagram;
+    if (tiktokLink && settings.tiktok) tiktokLink.href = settings.tiktok;
+
+    // Meta tags SEO
+    if (settings.siteDescription) {
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) metaDescription.setAttribute('content', settings.siteDescription);
+    }
+    if (settings.siteTitle) {
+      document.title = settings.siteTitle;
+    }
   }
 
   async function initHero() {
@@ -65,17 +172,6 @@
         sourceEl.setAttribute('src', videoUrl);
         videoEl.load();
       }
-    }
-
-    // --- TEXTO HERO (TITLE / TAGLINE) ---
-    const titleEl = document.querySelector('[data-site-title]');
-    const taglineEl = document.querySelector('[data-site-tagline]');
-
-    if (titleEl && settings.siteTitle) {
-      titleEl.textContent = settings.siteTitle;
-    }
-    if (taglineEl && settings.siteTagline) {
-      taglineEl.textContent = settings.siteTagline;
     }
   }
 
@@ -113,25 +209,6 @@
   }
 
   // =========================
-  // SELECTOR DE IDIOMA: efecto visual (active)
-  // =========================
-
-  function setActiveLang(lang) {
-    document.querySelectorAll('.lang-btn').forEach((btn) => {
-      const btnLang = btn.getAttribute('data-lang');
-      btn.classList.toggle('active', btnLang === lang);
-    });
-    // futuro: disparar cambio real de idioma (CMS / i18n)
-  }
-
-  document.querySelectorAll('.lang-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const lang = btn.getAttribute('data-lang') || 'es';
-      setActiveLang(lang);
-    });
-  });
-
-  // =========================
   // FORMULARIO (home)
   // =========================
 
@@ -158,12 +235,99 @@
   }
 
   // =========================
-  // INIT HERO + PROTECCIÓN DE IMÁGENES
+  // SISTEMA DE IDIOMAS (i18n)
   // =========================
 
-  document.addEventListener('DOMContentLoaded', () => {
+  let TRANSLATIONS = {};
+  let CURRENT_LANG = localStorage.getItem('lang') || 'es';
+
+  async function loadTranslations() {
+    if (Object.keys(TRANSLATIONS).length) return TRANSLATIONS;
+
+    const query = `*[_type == "translation"]{
+      key,
+      es,
+      en
+    }`;
+
+    const url = `https://${SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${SANITY_DATASET}?query=${encodeURIComponent(query)}`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      TRANSLATIONS = {};
+      (data.result || []).forEach(t => {
+        TRANSLATIONS[t.key] = { es: t.es, en: t.en };
+      });
+    } catch (e) {
+      console.warn('Error cargando traducciones:', e);
+    }
+    return TRANSLATIONS;
+  }
+
+  function t(key) {
+    const translation = TRANSLATIONS[key];
+    if (!translation) return key;
+    return translation[CURRENT_LANG] || translation.es || key;
+  }
+
+  async function applyTranslations() {
+    await loadTranslations();
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const translated = t(key);
+      if (translated && translated !== key) el.textContent = translated;
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      const translated = t(key);
+      if (translated && translated !== key) el.setAttribute('placeholder', translated);
+    });
+
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      const key = el.getAttribute('data-i18n-alt');
+      const translated = t(key);
+      if (translated && translated !== key) el.setAttribute('alt', translated);
+    });
+  }
+
+  function setLanguage(lang) {
+    CURRENT_LANG = lang;
+    localStorage.setItem('lang', lang);
+    applyTranslations();
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      const btnLang = btn.getAttribute('data-lang');
+      btn.classList.toggle('active', btnLang === lang);
+    });
+  }
+
+  // =========================
+  // SELECTOR DE IDIOMA (reemplaza el anterior)
+  // =========================
+
+  document.querySelectorAll('.lang-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang') || 'es';
+      setLanguage(lang);
+    });
+  });
+
+  // =========================
+  // INIT HERO + TEXTOS + IDIOMAS + PROTECCIÓN DE IMÁGENES
+  // =========================
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Cargar textos globales desde Sanity
+    await loadGlobalTexts();
+    
     // Hero desde settings
-    initHero();
+    await initHero();
+
+    // Aplicar traducciones
+    await applyTranslations();
 
     // Bloquear menú contextual solo sobre <img>
     document.addEventListener('contextmenu', (event) => {
@@ -233,7 +397,6 @@ async function loadWorks() {
 async function loadSeries() {
   if (SERIES.length) return SERIES;
 
-  // USO orderRank (desde versión remota) + featuredOnHome (desde local)
   const query = `*[_type == "series"] | order(orderRank asc){
     title,
     subtitle,
@@ -292,7 +455,7 @@ async function loadJournal() {
   const path = window.location.pathname;
 
   // -------------------------
-  // HOME: destacados de obras, series y journal (DESDE LOCAL)
+  // HOME: destacados de obras, series y journal
   // -------------------------
   if (path.endsWith('/') || path.endsWith('/index.html')) {
     // Obras destacadas
