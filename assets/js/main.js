@@ -258,8 +258,13 @@
       const data = await res.json();
       TRANSLATIONS = {};
       (data.result || []).forEach(t => {
-        TRANSLATIONS[t.key] = { es: t.es, en: t.en };
+        TRANSLATIONS[t.key] = { 
+          es: t.es, 
+          en: t.en, 
+          de: t.de 
+        };
       });
+      console.log('Traducciones cargadas:', TRANSLATIONS);
     } catch (e) {
       console.warn('Error cargando traducciones:', e);
     }
@@ -309,7 +314,7 @@
   }
 
   // =========================
-  // SELECTOR DE IDIOMA (reemplaza el anterior)
+  // SELECTOR DE IDIOMA
   // =========================
 
   document.querySelectorAll('.lang-btn').forEach((btn) => {
