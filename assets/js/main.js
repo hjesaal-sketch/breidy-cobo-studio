@@ -184,31 +184,102 @@
 })();
 
 // =========================
-// Carga de datos desde JSON (luego será CMS/API)
+// Carga de datos desde Sanity (en vez de JSON local)
 // =========================
 
 let WORKS = [];
 let SERIES = [];
 let JOURNAL = [];
 
+const SANITY_PROJECT_ID = 'qq8wzii5';
+const SANITY_DATASET = 'production';
+const SANITY_API_VERSION = '2021-10-21';
+
+function buildSanityUrl(groqQuery) {
+  return `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}?query=${encodeURIComponent(
+    groqQuery
+  )}`;
+}
+
 async function loadWorks() {
   if (WORKS.length) return WORKS;
-  const res = await fetch('/content/works/work.json');
-  WORKS = await res.json();
+
+  const query = `*[_type == "work"] | order(year desc){
+    title,
+    "slug": slug.current,
+    year,
+    medium,
+    size,
+    status,
+    excerpt,
+    description,
+    "image": image.asset->url,
+    featuredOnHome
+  }`;
+
+  try {
+    const res = await fetch(buildSanityUrl(query));
+    if (!res.ok) throw new Error('Error al cargar obras desde Sanity');
+    const data = await res.json();
+    WORKS = data.result || [];
+  } catch (e) {
+    console.warn('No se pudieron cargar las obras desde Sanity:', e);
+    WORKS = [];
+  }
+
   return WORKS;
 }
 
 async function loadSeries() {
   if (SERIES.length) return SERIES;
-  const res = await fetch('/content/series/series.json');
-  SERIES = await res.json();
+
+  const query = `*[_type == "series"] | order(title asc){
+    title,
+    subtitle,
+    description,
+    period,
+    notes,
+    "slug": slug.current,
+    "image": image.asset->url,
+    featuredOnHome
+  }`;
+
+  try {
+    const res = await fetch(buildSanityUrl(query));
+    if (!res.ok) throw new Error('Error al cargar series desde Sanity');
+    const data = await res.json();
+    SERIES = data.result || [];
+  } catch (e) {
+    console.warn('No se pudieron cargar las series desde Sanity:', e);
+    SERIES = [];
+  }
+
   return SERIES;
 }
 
 async function loadJournal() {
   if (JOURNAL.length) return JOURNAL;
-  const res = await fetch('/content/press/journal.json');
-  JOURNAL = await res.json();
+
+  const query = `*[_type == "journalEntry"] | order(date desc){
+    title,
+    excerpt,
+    category,
+    date,
+    "slug": slug.current,
+    contentHtml,
+    featuredOnHome
+  }`;
+
+  try {
+    const res = await fetch(buildSanityUrl(query));
+    if (!res.ok) throw new Error('Error al cargar journal desde Sanity');
+    const data = await res.json();
+    JOURNAL = data.result || [];
+  } catch (e) {
+    console.warn('No se pudieron cargar los textos de journal desde Sanity:', e);
+    JOURNAL = [];
+  }
+
   return JOURNAL;
 }
 
@@ -220,6 +291,123 @@ async function loadJournal() {
   const path = window.location.pathname;
 
   // -------------------------
+  // HOME: destacados de obras, series y journal
+  // -------------------------
+  if (path.endsWith('/') || path.endsWith('/index.html')) {
+    // Obras destacadas
+    const homeWorksGrid = document.querySelector('[data-home-works-grid]');
+    if (homeWorksGrid) {
+      const works = await loadWorks();
+      const featuredWorks = works.filter((w) => w.featuredOnHome).slice(0, 3);
+
+      homeWorksGrid.innerHTML = featuredWorks
+        .map((work) => {
+          const detailUrl = `obras/obra.html?slug=${encodeURIComponent(work.slug)}`;
+
+          const statusLabel =
+            work.status === 'vendida'
+              ? 'Vendida'
+              : work.status === 'reservada'
+              ? 'Reservada'
+              : 'Disponible';
+
+          const statusMeta =
+            work.status === 'vendida'
+              ? 'Obra vendida'
+              : work.status === 'reservada'
+              ? 'Obra reservada'
+              : 'Consulta disponible';
+
+          return `
+            <article class="card">
+              <div class="framed-media">
+                <div class="frame-inner">
+                  <a href="${detailUrl}">
+                    <img src="${work.image}" alt="Obra ${work.title} de Breidy Cobo" />
+                  </a>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="kicker">${statusLabel}</div>
+                <h3><a href="${detailUrl}">${work.title}</a></h3>
+                <p>${work.excerpt || ''}</p>
+                <div class="meta">
+                  <span>${work.medium || ''}</span>
+                  <span>${work.year || ''}</span>
+                  <span>${statusMeta}</span>
+                </div>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+    }
+
+    // Series destacadas
+    const homeSeriesGrid = document.querySelector('[data-home-series-grid]');
+    if (homeSeriesGrid) {
+      const seriesList = await loadSeries();
+      const featuredSeries = seriesList.filter((s) => s.featuredOnHome).slice(0, 3);
+
+      homeSeriesGrid.innerHTML = featuredSeries
+        .map((series) => {
+          const detailUrl = `series/serie.html?slug=${encodeURIComponent(series.slug)}`;
+
+          return `
+            <article class="card">
+              <div class="framed-media">
+                <div class="frame-inner">
+                  <a href="${detailUrl}">
+                    <img src="${
+                      series.image || 'assets/img/placeholder-serie.jpg'
+                    }" alt="Serie ${series.title}" />
+                  </a>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="kicker">Serie</div>
+                <h3><a href="${detailUrl}">${series.title}</a></h3>
+                <p>${series.description || ''}</p>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+    }
+
+    // Journal destacado
+    const homeJournalGrid = document.querySelector('[data-home-journal-grid]');
+    if (homeJournalGrid) {
+      const entries = await loadJournal();
+      const featuredEntries = entries.filter((e) => e.featuredOnHome).slice(0, 3);
+
+      homeJournalGrid.innerHTML = featuredEntries
+        .map((entry) => {
+          const detailUrl = `journal/texto.html?slug=${encodeURIComponent(entry.slug)}`;
+
+          return `
+            <article class="journal-card">
+              <header class="journal-card-header">
+                <p class="journal-card-meta">
+                  <span class="journal-card-date">${entry.date || ''}</span>
+                  <span class="journal-card-separator">·</span>
+                  <span class="journal-card-category">${entry.category || ''}</span>
+                </p>
+                <h3 class="journal-card-title">
+                  <a href="${detailUrl}">${entry.title}</a>
+                </h3>
+              </header>
+              <p class="journal-card-excerpt">
+                ${entry.excerpt || ''}
+              </p>
+            </article>
+          `;
+        })
+        .join('');
+    }
+  }
+
+  // -------------------------
   // Listado de obras en /obras/
   // -------------------------
   if (path.endsWith('/obras/') || path.endsWith('/obras/index.html')) {
@@ -227,24 +415,25 @@ async function loadJournal() {
     if (list) {
       const works = await loadWorks();
 
-      list.innerHTML = works.map((work) => {
-        const detailUrl = `obra.html?slug=${encodeURIComponent(work.slug)}`;
+      list.innerHTML = works
+        .map((work) => {
+          const detailUrl = `obra.html?slug=${encodeURIComponent(work.slug)}`;
 
-        const statusLabel =
-          work.status === 'vendida'
-            ? 'Vendida'
-            : work.status === 'reservada'
-            ? 'Reservada'
-            : 'Disponible';
+          const statusLabel =
+            work.status === 'vendida'
+              ? 'Vendida'
+              : work.status === 'reservada'
+              ? 'Reservada'
+              : 'Disponible';
 
-        const statusMeta =
-          work.status === 'vendida'
-            ? 'Obra vendida'
-            : work.status === 'reservada'
-            ? 'Obra reservada'
-            : 'Consulta disponible';
+          const statusMeta =
+            work.status === 'vendida'
+              ? 'Obra vendida'
+              : work.status === 'reservada'
+              ? 'Obra reservada'
+              : 'Consulta disponible';
 
-        return `
+          return `
           <article class="card">
             <div class="framed-media">
               <div class="frame-inner">
@@ -265,7 +454,8 @@ async function loadJournal() {
             </div>
           </article>
         `;
-      }).join('');
+        })
+        .join('');
     }
   }
 
@@ -277,10 +467,11 @@ async function loadJournal() {
     if (seriesGrid) {
       const seriesList = await loadSeries();
 
-      seriesGrid.innerHTML = seriesList.map((series) => {
-        const detailUrl = `serie.html?slug=${encodeURIComponent(series.slug)}`;
+      seriesGrid.innerHTML = seriesList
+        .map((series) => {
+          const detailUrl = `serie.html?slug=${encodeURIComponent(series.slug)}`;
 
-        return `
+          return `
           <article class="card">
             <div class="framed-media">
               <div class="frame-inner">
@@ -303,7 +494,8 @@ async function loadJournal() {
             </div>
           </article>
         `;
-      }).join('');
+        })
+        .join('');
     }
   }
 
@@ -315,10 +507,11 @@ async function loadJournal() {
     if (journalGrid) {
       const entries = await loadJournal();
 
-      journalGrid.innerHTML = entries.map((entry) => {
-        const detailUrl = `texto.html?slug=${encodeURIComponent(entry.slug)}`;
+      journalGrid.innerHTML = entries
+        .map((entry) => {
+          const detailUrl = `texto.html?slug=${encodeURIComponent(entry.slug)}`;
 
-        return `
+          return `
           <article class="journal-card">
             <header class="journal-card-header">
               <p class="journal-card-meta">
@@ -338,7 +531,8 @@ async function loadJournal() {
             </p>
           </article>
         `;
-      }).join('');
+        })
+        .join('');
     }
   }
 })();
