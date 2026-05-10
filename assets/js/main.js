@@ -233,7 +233,8 @@ async function loadWorks() {
 async function loadSeries() {
   if (SERIES.length) return SERIES;
 
-  const query = `*[_type == "series"] | order(title asc){
+  // USO orderRank (desde versión remota) + featuredOnHome (desde local)
+  const query = `*[_type == "series"] | order(orderRank asc){
     title,
     subtitle,
     description,
@@ -291,7 +292,7 @@ async function loadJournal() {
   const path = window.location.pathname;
 
   // -------------------------
-  // HOME: destacados de obras, series y journal
+  // HOME: destacados de obras, series y journal (DESDE LOCAL)
   // -------------------------
   if (path.endsWith('/') || path.endsWith('/index.html')) {
     // Obras destacadas
