@@ -338,6 +338,17 @@
     // Aplicar traducciones
     await applyTranslations();
 
+    // Asegurar que el selector muestre el idioma correcto después de recargar
+    const currentLang = localStorage.getItem('lang') || 'es';
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      const btnLang = btn.getAttribute('data-lang');
+      if (btnLang === currentLang) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
     // Bloquear menú contextual solo sobre <img>
     document.addEventListener('contextmenu', (event) => {
       const target = event.target;
